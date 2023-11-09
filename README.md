@@ -1,6 +1,6 @@
 # Confluence 2023 Discord Bot
 
-This bot is designed to run using Python and the Discord.py library. This was created for Confluence 2023.
+This bot is designed to run using Python and the Discord.py library.
 
 ## Installation Steps
 
