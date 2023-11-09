@@ -7,6 +7,7 @@ import aiohttp
 import discord
 import requests
 from discord.ext import commands
+from discord.ext.commands import CommandNotFound
 from dotenv import load_dotenv
 from pytz import timezone
 
@@ -37,6 +38,12 @@ async def on_ready():
     logging.info(f"logged in as {bot.user.name} ({bot.user.id})")
     await bot.tree.sync()
     await bot.change_presence(activity=discord.Game(name="with life"))
+
+
+@bot.event
+async def on_command_error(ctx, error):
+    if isinstance(error, CommandNotFound):
+        return
 
 
 @bot.hybrid_command()
@@ -116,7 +123,9 @@ async def sendgif(ctx, link):
                         async with session.get(link) as resp:
                             if resp.status == 200:
                                 data = io.BytesIO(await resp.read())
-                                await channel.send(file=discord.File(data, "attachment.gif"))
+                                await channel.send(
+                                    file=discord.File(data, "attachment.gif")
+                                )
                                 await ctx.send("GIF sent successfully.", ephemeral=True)
                                 logging.info(f"gif sent by {ctx.author.name}")
                             else:
