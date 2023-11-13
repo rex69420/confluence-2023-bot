@@ -113,7 +113,7 @@ async def editmessage(ctx, link, message_id):
 
 
 @bot.hybrid_command()
-async def sendgif(ctx, link):
+async def sendattachment(ctx, link, extension):
     if isinstance(ctx.channel, discord.channel.TextChannel):
         if ctx.author.guild_permissions.administrator:
             channel = ctx.channel
@@ -124,10 +124,10 @@ async def sendgif(ctx, link):
                             if resp.status == 200:
                                 data = io.BytesIO(await resp.read())
                                 await channel.send(
-                                    file=discord.File(data, "attachment.gif")
+                                    file=discord.File(data, "attachment." + extension)
                                 )
-                                await ctx.send("GIF sent successfully.", ephemeral=True)
-                                logging.info(f"gif sent by {ctx.author.name}")
+                                await ctx.send("attachment sent successfully.", ephemeral=True)
+                                logging.info(f"attachment sent by {ctx.author.name}")
                             else:
                                 await ctx.send(
                                     "Failed to fetch the content from the provided link.",
