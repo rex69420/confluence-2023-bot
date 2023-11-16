@@ -113,7 +113,7 @@ async def editmessage(ctx, link, message_id):
 
 
 @bot.hybrid_command()
-async def sendattachment(ctx, link, extension):
+async def sendattachment(ctx, link, name, extension):
     if isinstance(ctx.channel, discord.channel.TextChannel):
         if ctx.author.guild_permissions.administrator:
             channel = ctx.channel
@@ -124,9 +124,11 @@ async def sendattachment(ctx, link, extension):
                             if resp.status == 200:
                                 data = io.BytesIO(await resp.read())
                                 await channel.send(
-                                    file=discord.File(data, "attachment." + extension)
+                                    file=discord.File(data, name + "." + extension)
                                 )
-                                await ctx.send("attachment sent successfully.", ephemeral=True)
+                                await ctx.send(
+                                    "attachment sent successfully.", ephemeral=True
+                                )
                                 logging.info(f"attachment sent by {ctx.author.name}")
                             else:
                                 await ctx.send(
