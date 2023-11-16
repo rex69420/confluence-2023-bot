@@ -17,6 +17,6 @@ python bot.py
 - Use the following commands in Discord after inviting the bot to a server:
 
     - `/sendmessage <message or link>`: Sends a message to the current channel.
-    - `/editmessage <link> <message_id>`: Edits a message in the current channel.
-    - `/sendgif <link>`: Sends a GIF to the current channel.
+    - `/editmessage <message or link> <message_id>`: Edits a message in the current channel.
+    - `/sendattachment <link> <name> <extension>`: Sends an attachment to the current channel.
     - `$flag`: Sends the flag if you direct message the bot.
