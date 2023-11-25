@@ -32,6 +32,20 @@ intents.message_content = True
 bot = commands.Bot(command_prefix="$", intents=intents)
 client = discord.Client(intents=intents)
 
+poem = """In the crucib__l__e of science, Oppen6heimer stood,
+A maestro of atoms, shaping fire and wood.
+Los Alamos witnessed his atomic danc2e,
+__a__ paradoxical genius, caught in fAte's trance.
+
+Beside him, Hill, a sage with a different pen,
+In scholarly realms, guiding minds again.
+His words, a river of wisdom that flows,
+Through mathematical landscapes, whe__r__e curiosity grows.
+
+Oppenheimer's shadow, a specter of dread,
+Yet Hill's light, a beacon that scholars are led.
+Two lives entwined, in history's grand scheme,
+Oppenheimer's tempest, Hill's academic dreaUm."""
 
 @bot.event
 async def on_ready():
@@ -151,6 +165,12 @@ async def flag(ctx):
     if isinstance(ctx.channel, discord.channel.DMChannel):
         logging.info(f"flag called by {ctx.author.name}")
         await ctx.send(f"hi! here's your flag: `{FLAG}`", ephemeral=True)
+
+@bot.command()
+async def capturetherex(ctx):
+    if isinstance(ctx.channel, discord.channel.DMChannel):
+        logging.info(f"capturetherex called by {ctx.author.name}")
+        await ctx.send(poem, ephemeral=True)
 
 
 bot.run(TOKEN)
